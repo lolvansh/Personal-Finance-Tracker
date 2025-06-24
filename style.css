@@ -224,3 +224,71 @@ a{
 .add-expense:hover .expense-btn{
     background-color: hsl(133, 41%,80%);
 }
+
+
+
+
+/* here is the code for all the changes in the stats page */
+
+.reportCards{
+    display: flex;
+
+
+}
+
+.monthlyCard , .yearlyCard, .allTimeCard{
+    display: flex;
+    flex-direction: column;
+    margin: 20px; 
+    padding: 32px;
+    background-color: rgb(207, 241, 207); 
+    border-radius: 10px; 
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.349); 
+}
+
+.reportName{
+    display: flex;
+    font-weight: bold;
+    font-size: 24px;
+    align-content: center;
+    gap: 4px;
+    text-decoration:underline hsla(0, 0%, 50%, 0.342);
+}
+
+
+.incomeTextDisplay{
+    color: rgb(32, 88, 0);
+    font-weight: bold;
+}
+
+.expenseTextDisplay{
+    font-weight: bold;
+    color: rgba(255, 0, 0, 0.726);
+}
+
+.balanceTextDisplay{
+    font-weight: bold;
+    color: rgba(0, 0, 255, 0.623);
+    padding-bottom: 0;
+}
+
+.balanceDisplay,.expenseDisplay, .incomeDisplay{
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.incomeTextDisplay, .expenseTextDisplay, .balanceTextDisplay{
+    margin:0;
+    margin-top: 12px;
+}
+
+
+
+.top-section{
+    display: flex;
+    flex: 1;
+    gap: 30px;
+}
+
+
+

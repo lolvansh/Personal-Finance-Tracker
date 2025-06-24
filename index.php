@@ -56,11 +56,11 @@ $transaction = $conn ->query(
                         <img src="./assests/nav/dashboard.svg" alt="dashboard.svg" class="nav-image" width="40px">
                         <a href="index.php" class="active">Overview</a></li>
                     <li class="items">
-                        <img src="./assests/nav/transaction.svg" alt="transaction.svg" class="nav-image" width="40px">
-                        Transactions</li>
+                        <img src="./assests/nav/stats.svg" alt="transaction.svg" class="nav-image" width="40px">
+                        <a href="stats.php">Statistics</a></li>
                     <li class="items">
-                        <img src="./assests/nav/stats.svg" alt="stats.svg" class="nav-image" width="40px">
-                        Statistics</li>
+                        <img src="./assests/nav/transaction.svg" alt="stats.svg" class="nav-image" width="40px">
+                        Transactions</li>
                     <li class="items">
                         <img src="./assests/nav/report.svg" alt="report.svg" class="nav-image" width="40px">
                         Report</li>
@@ -136,7 +136,6 @@ $transaction = $conn ->query(
                 </div>
                 </div>
         </div>
-
     </div>
 </body>
 </html>
