@@ -54,7 +54,7 @@ $transaction = $conn ->query(
                 <ul class="navbar-list">
                     <li class="items">
                         <img src="./assests/nav/dashboard.svg" alt="dashboard.svg" class="nav-image" width="40px">
-                        <a href="index.html">Overview</a></li>
+                        <a href="index.php" class="active">Overview</a></li>
                     <li class="items">
                         <img src="./assests/nav/transaction.svg" alt="transaction.svg" class="nav-image" width="40px">
                         Transactions</li>

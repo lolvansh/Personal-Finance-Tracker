@@ -55,6 +55,11 @@ body{
 
 a{
     text-decoration: none;
+    color: black;
+}
+
+.navbar-list .items a.active{
+      color: rgb(20, 96, 143)
 }
 
 
