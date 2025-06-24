@@ -1,0 +1,221 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(224, 245, 224);
+}
+
+.top-section{
+    font-family: 'Times New Roman', Times, serif;
+    margin: 30px;
+    margin-left: 50px;
+    font-size: 25px
+}
+
+.middle-section{
+    display: flex;
+    gap: 40px;
+}
+
+.page-content{
+    display: flex;
+    gap: 40px;
+}
+
+.transfers{
+    display: flex;
+}
+
+
+
+
+
+
+/* nav bar */
+
+.navbar-list{
+    list-style: none;
+}
+
+.items{
+    font-size: 25px;
+    margin: 20px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.nav-image{
+    width: 40px;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+
+/*content */
+.page-overview{
+    background-color: hsla(0, 0%, 100%, 0.801);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.349);
+}
+
+
+.page-name{
+    font-size: 40px;
+    margin: 0;
+    margin-bottom: 5px;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+
+.transfers{
+
+    padding: 20px;
+    display: flex;
+    gap: 40px;
+}
+
+.income, .expense, .budget{
+    background-color: rgb(224, 245, 224);
+    display: flex;
+    margin: 0;
+    padding: 30px;
+    align-items: center;
+    gap: 20px;
+    border-radius: 30px;
+}
+
+.image {
+    background-color: rgb(144, 209, 158);
+    padding: 10px;
+    border-radius: 20px;
+    width: 100px;
+}
+
+.income-text{
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+}
+
+.income-value, .expense-value , .budget-value{
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+    margin-top: 10px;
+}
+
+/* recent transactions */
+
+.audits{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.transaction {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #daf0e3;
+  border-radius: 8px;
+  gap: 120px;
+}
+
+.icon {
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.usage {
+  flex: 2;
+  min-width: 120px;
+}
+
+.time {
+  flex: 2;
+  min-width: 150px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.amount {
+  flex: 1;
+  min-width: 80px;
+  text-align: right;
+  font-weight: bold;
+}
+
+.menu-icon {
+  width: 30px;
+  flex-shrink: 0;
+}
+
+
+
+
+/* quick buttons */
+.quick-buttons{
+    background-color: rgb(224, 245, 224);
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    border-radius: 10px;
+    gap: 10px;
+    text-align: left;
+    align-items: center;
+}
+
+.quick-text{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.5rem;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+
+.add-expense{
+    display: flex;
+    padding: 10px 20px;
+    background-color: hsl(133, 41%, 70%);
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0;
+}
+
+
+
+.income-btn, .expense-btn{
+    border: none;
+    font-weight: bold;
+    margin: 0;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: hsl(133, 41%, 70%);
+}
+
+.expense-btn{
+    padding: 10px;
+}
+
+.add-expense:hover{
+     background-color: hsl(133, 41%,80%);
+}
+
+
+.add-expense:hover .income-btn  {
+    background-color: hsl(133, 41%,80%);
+}
+
+.add-expense:hover .expense-btn{
+    background-color: hsl(133, 41%,80%);
+}

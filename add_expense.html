@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleExp.css">
+</head>
+<body>
+    <div class="container">
+    <form  class="form" action="expense.php" method="POST">
+        <h2>Add Expense</h2>
+        <div class="category">
+            <label for="description" id="label">Category:</label>
+            <select id="description" name="description" required>
+                <option value="">--select category--</option>
+                <option value="Grocery">Grocery/Food</option>
+                <option value="Public Transport">Public Transport</option>
+                <option value="Shopping">Shoping</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Medical">Medical/Health</option>
+                <option value="Bills">Bills</option>
+                <option value="Others">Others</option>
+            </select>
+            <div class="empty-1" style="display:none;">Required to chose a category</div>
+        </div>
+        
+
+        <div class="amount">
+            <label for="Amount">Expense:</label>
+            <input type="number" name="Amount" required id="Amount" placeholder="00.00₹">
+            <p class="empty-2" style="display: none;">Required to enter a value</p>
+        </div>
+
+        <div class="buttons">
+             <button type="submit" id="submit" name="submit">Add Entry</button>
+        </div>
+    </form>
+    </div>
+    <script src="expense.js"></script>
+</body>
+</html>
