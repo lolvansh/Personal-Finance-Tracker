@@ -136,23 +136,29 @@ $transaction = $conn ->query(
 
                 <div class="chart-section">
                     <p>Weekly Spending Trend</p>
-                    <canvas id="monthlyLineChart" width="500" height="350"></canvas>
+                    <canvas id="weeklychart" width="500" height="350"></canvas>
                 </div>
 
             </div>
 
-            
-                <div class="chart-section">
-                <h3>Category-wise Spending (Doughnut)</h3>
-                <canvas id="categoryDoughnutChart" width="400" height="400"></canvas>
+            <div class="bottom">
+                <div class="category-chart">
+                    <p class="chartName">Categorical Expenses</p>
+                    <div class="chart-container">
+                        <canvas id="doughnutChart" width="500" height="500"></canvas>
+                    </div>
                 </div>
-            
-
-
+                <div class="bar-chart">
+                    <p class="chartName">Monthly Income vs Expense</p>
+                    
+                    <canvas id="incomeExpenseBarChart" width="700" height="500"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="stats.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js?v=1.0"></script>
+    <script src="stats.js?v=1.0"></script>
 </body>
 </html>

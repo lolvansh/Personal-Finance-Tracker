@@ -290,5 +290,16 @@ a{
     gap: 30px;
 }
 
+.bottom{
+    display: flex;
+    gap: 7rem;
+    margin-left: 5rem;
+}
+
+.chartName{
+    font-size: 20px;
+    font-weight: bold;
+}
+
 
 
