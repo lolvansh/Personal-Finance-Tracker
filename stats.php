@@ -150,7 +150,6 @@ $transaction = $conn ->query(
                 </div>
                 <div class="bar-chart">
                     <p class="chartName">Monthly Income vs Expense</p>
-                    
                     <canvas id="incomeExpenseBarChart" width="700" height="500"></canvas>
                 </div>
             </div>

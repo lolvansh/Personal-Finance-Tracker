@@ -101,7 +101,4 @@ const barChart = new Chart(barCtx, {
     }
   }
 });
-
-
-
 })
