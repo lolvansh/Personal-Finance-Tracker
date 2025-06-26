@@ -78,8 +78,7 @@ async function loadDoughnutChart() {
           label: 'Spending',
           data: values,
           backgroundColor: [
-            'hsl(133, 60.00%, 64.70%)', 'hsla(132, 64.50%, 75.70%, 0.85)', 'hsl(133, 26.60%, 33.10%)', 'hsl(133, 27.80%, 42.40%)', 'hsl(132, 31.70%, 61.00%)',
-            'hsl(134, 31.70%, 75.30%)', 'hsla(133, 41.20%, 70.00%, 0.88)'
+            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
           ],
           borderColor: '#fff',
           borderWidth: 2
@@ -119,7 +118,7 @@ new Chart(ctx, {
         label: 'Expense',
         data: [1000, 1100, 900, 1300, 1200, 1500],  // Replace with real expense data
         borderColor: 'rgb(245, 88, 109)',
-        backgroundColor: 'rgba(255, 20, 20, 0.10)',
+        backgroundColor: 'rgba(247, 99, 31, 0.1)',
         tension: 0.3,
         fill: true
       }
