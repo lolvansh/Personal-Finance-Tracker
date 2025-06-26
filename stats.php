@@ -10,24 +10,20 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$incomeResult = $conn -> query("select SUM(amount) AS total_income from income");
-$totalIncome = $incomeResult ->fetch_assoc()['total_income'] ?? 0;
+$month = date('m');
+$year = date('Y');
 
+$all_income = $conn ->query('SELECT SUM(amount) AS total FROM income')->fetch_assoc()['total'] ?? 0;
+$all_expense = $conn ->query('SELECT SUM(amount) AS total FROM expense')->fetch_assoc()['total'] ?? 0;
+$all_balance = $all_income - $all_expense;
 
-$expenseResult = $conn ->query("select SUM(amount) as total_expense from expense");
-$totalExpense = $expenseResult ->fetch_assoc()['total_expense'] ?? 0;
+$month_income = $conn->query("SELECT SUM(amount) AS total FROM income WHERE MONTH(date) = $month AND YEAR(date) = $year")->fetch_assoc()['total'] ?? 0;
+$month_expense = $conn->query("SELECT SUM(amount) AS total FROM expense WHERE MONTH(date) = $month AND YEAR(date) = $year")->fetch_assoc()['total'] ?? 0;
+$month_balance = $month_income - $month_expense;
 
-$balance = $totalIncome - $totalExpense;
-
-$transaction = $conn ->query(
-    "
-    SELECT category, amount, date, 'Expense' AS type FROM expense
-    UNION
-    SELECT category, amount, date, 'Income' AS type FROM income
-    ORDER BY date DESC
-    LIMIT 5
-"
-);
+$year_income = $conn ->query("SELECT SUM(amount) AS total FROM income WHERE YEAR(date) = $year")->fetch_assoc()['total'] ?? 0;
+$year_expense = $conn ->query("SELECT SUM(amount) AS total FROM expense WHERE YEAR(date) = $year")->fetch_assoc()['total'] ?? 0;
+$year_balance = $year_income - $year_expense;
 
 ?>
 
@@ -83,15 +79,15 @@ $transaction = $conn ->query(
                         </div>
                         <div class="displayIncome">
                             <p class="incomeTextDisplay">Totol Income</p>
-                            <p class="incomeDisplay">65,000.00</p>
+                            <p class="incomeDisplay">₹<?= number_format($month_income,2)?></p>
                         </div>
                         <div class="displayExpense">
                             <p class="expenseTextDisplay">Totol Expense</p>
-                            <p class="expenseDisplay">65,000.00</p>
+                            <p class="expenseDisplay">₹<?=number_format($month_expense,2) ?></p>
                         </div>
                         <div class="displayBalance">
                             <p class="balanceTextDisplay">Totol Balance</p>
-                            <p class="balanceDisplay">65,000.00</p>
+                            <p class="balanceDisplay">₹<?= number_format($month_balance,2)?></p>
                         </div>
                     </div>
                     <!--yearly-->
@@ -102,15 +98,15 @@ $transaction = $conn ->query(
                         </div>
                         <div class="displayIncome">
                             <p class="incomeTextDisplay">Totol Income</p>
-                            <p class="incomeDisplay">65,000.00</p>
+                            <p class="incomeDisplay">₹<?= number_format($year_income,2)?></p>
                         </div>
                         <div class="displayExpense">
                             <p class="expenseTextDisplay">Totol Expense</p>
-                            <p class="expenseDisplay">65,000.00</p>
+                            <p class="expenseDisplay">₹<?= number_format($year_expense,2)?></p>
                         </div>
                         <div class="displayBalance">
                             <p class="balanceTextDisplay">Totol Balance</p>
-                            <p class="balanceDisplay">65,000.00</p>
+                            <p class="balanceDisplay">₹<?= number_format($year_balance,2)?></p>
                         </div>
                     </div>
                     <!--all time  -->
@@ -121,15 +117,15 @@ $transaction = $conn ->query(
                         </div>
                         <div class="displayIncome">
                             <p class="incomeTextDisplay">Totol Income</p>
-                            <p class="incomeDisplay">65,000.00</p>
+                            <p class="incomeDisplay">₹<?= number_format($all_income,2) ?></p>
                         </div>
                         <div class="displayExpense">
                             <p class="expenseTextDisplay">Totol Expense</p>
-                            <p class="expenseDisplay">65,000.00</p>
+                            <p class="expenseDisplay">₹<?= number_format($all_expense,2) ?></p>
                         </div>
                         <div class="displayBalance">
                             <p class="balanceTextDisplay">Totol Balance</p>
-                            <p class="balanceDisplay">65,000.00</p>
+                            <p class="balanceDisplay">₹<?= number_format($all_balance,2)?></p>
                         </div>
                     </div>
                 </div>
@@ -150,7 +146,7 @@ $transaction = $conn ->query(
                 </div>
                 <div class="bar-chart">
                     <p class="chartName">Monthly Income vs Expense</p>
-                    <canvas id="incomeExpenseBarChart" width="700" height="500"></canvas>
+                    <canvas id="incomeExpenseLineChart" width="650" height="500"></canvas>
                 </div>
             </div>
         </div>
@@ -158,6 +154,6 @@ $transaction = $conn ->query(
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js?v=1.0"></script>
-    <script src="stats.js?v=1.0"></script>
+    <script src="stats.js"></script>
 </body>
 </html>
