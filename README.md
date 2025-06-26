@@ -19,3 +19,6 @@ A responsive web application to help you track your income, expenses, and financ
 - **Backend**: PHP (Procedural)
 - **Database**: MySQL
 - **Server**: XAMPP / Apache (for local testing)
+
+![Dashboard](assests/screenshots/Dashboard.jpg)
+![Stats](assests/screenshots/stats.jpg)
