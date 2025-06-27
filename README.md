@@ -20,10 +20,11 @@ A responsive web application to help you track your income, expenses, and financ
 - **Database**: MySQL
 - **Server**: XAMPP / Apache (for local testing)
 
-![Dashboard](assests/screenshots/Dashboard.jpg)
+dont know what to add below the quick buttons lemme think
+![Dashboard](assests/screenshots/dashboard.png)
 
 
-![Stats](assests/screenshots/statistics.jpg)
+![Stats](assests/screenshots/stats.png)
 
 
 working on transaction and report page
