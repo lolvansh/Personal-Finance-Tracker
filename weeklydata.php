@@ -11,12 +11,12 @@ if ($conn->connect_error) {
 // Example query: Get SUM per day for past 7 days
 $sql = "
 SELECT 
-  DATE_FORMAT(date, '%W') AS day_name,
+  DATE_FORMAT(date, '%a') AS day_name,
   SUM(amount) AS total
 FROM expense
 WHERE date >= CURDATE() - INTERVAL 6 DAY
 GROUP BY day_name
-ORDER BY FIELD(day_name, 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+ORDER BY FIELD(day_name, 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 ";
 
 $result = $conn->query($sql);

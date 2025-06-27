@@ -36,7 +36,7 @@ $year_balance = $year_income - $year_expense;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finance-tracker</title>
-    <link rel="stylesheet" href="style.css?v=1.0">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="top-section">
@@ -131,7 +131,7 @@ $year_balance = $year_income - $year_expense;
                 </div>
 
                 <div class="chart-section">
-                    <p>Weekly Spending Trend</p>
+                    <p class="chartName" >Weekly Spending Trend</p>
                     <canvas id="weeklychart" width="500" height="350"></canvas>
                 </div>
 
@@ -154,6 +154,6 @@ $year_balance = $year_income - $year_expense;
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js?v=1.0"></script>
-    <script src="stats.js"></script>
+    <script src="stats.js?v=1.0"></script>
 </body>
 </html>

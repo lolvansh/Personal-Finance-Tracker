@@ -14,7 +14,8 @@ async function loadlinechart(params) {
   try {
     const response = await fetch('Weeklydata.php');
     const data = await response.json();
-    console.log("Data received:", data);
+
+    
 
     const weeklylabels = data.map(entry => entry.day);
     const values = data.map(entry => entry.total);
@@ -78,7 +79,7 @@ async function loadDoughnutChart() {
           label: 'Spending',
           data: values,
           backgroundColor: [
-            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF','pink','purple','blue'
           ],
           borderColor: '#fff',
           borderWidth: 2
@@ -101,14 +102,21 @@ async function loadlastchart(params) {
 
   const ctx = document.getElementById('incomeExpenseLineChart').getContext('2d');
 
+  const response = await fetch('barchartdata.php');
+  const data = await response.json();
+
+  const labels = data.map(entry => entry.month);
+  const incomeData = data.map(entry => entry.income);
+  const expenseData = data.map(entry => entry.expense);
+
 new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],  // Replace with dynamic labels later
+    labels: labels,  // Replace with dynamic labels later
     datasets: [
       {
         label: 'Income',
-        data: [1200, 1500, 1300, 1600, 1400, 1800],  // Replace with real income data
+        data: incomeData,  // Replace with real income data
         borderColor: 'rgb(63, 197, 63)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         tension: 0.3,
@@ -116,7 +124,7 @@ new Chart(ctx, {
       },
       {
         label: 'Expense',
-        data: [1000, 1100, 900, 1300, 1200, 1500],  // Replace with real expense data
+        data: expenseData,  // Replace with real expense data
         borderColor: 'rgb(245, 88, 109)',
         backgroundColor: 'rgba(247, 99, 31, 0.1)',
         tension: 0.3,

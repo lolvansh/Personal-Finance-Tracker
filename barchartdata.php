@@ -10,26 +10,29 @@ if ($conn->connect_error) {
 }
 
 $sql = "
-SELECT 
-    DATE_FORMAT(date, '%b') AS month, 
+SELECT  
+    month,
     SUM(CASE WHEN type = 'Income' THEN amount ELSE 0 END) AS income,
     SUM(CASE WHEN type = 'Expense' THEN amount ELSE 0 END) AS expense
 FROM (
-    SELECT date, amount, 'Income' as type FROM income
+    SELECT DATE_FORMAT(date, '%Y-%m') AS month, amount, 'Income' AS type FROM income
     UNION ALL
-    SELECT date, amount, 'Expense' as type FROM expense
+    SELECT DATE_FORMAT(date, '%Y-%m') AS month, amount, 'Expense' AS type FROM expense
 ) AS combined
-WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-GROUP BY DATE_FORMAT(date, '%Y-%m')
-ORDER BY DATE_FORMAT(date, '%Y-%m')
+WHERE month >= DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 6 MONTH), '%Y-%m')
+GROUP BY month
+ORDER BY month;
 ";
 
 $result = $conn->query($sql);
 
 $data = [];
 while ($row = $result->fetch_assoc()) {
+
+    $timestamp = strtotime($row['month'].'-01');
+    $formattedmonth = date('M',$timestamp);
     $data[] = [
-        'month' => $row['month'],
+        'month' => $formattedmonth,
         'income' => (float)$row['income'],
         'expense' => (float)$row['expense']
     ];
