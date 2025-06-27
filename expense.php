@@ -46,7 +46,7 @@ if($stmt->execute()){
     echo "<script>
         setTimeout(function() {
             window.location.href = 'index.php';
-        }, 2000); // 2 seconds delay
+        }, 1000); // 2 seconds delay
         </script>";
 }else{
     echo "Error";

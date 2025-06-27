@@ -60,7 +60,7 @@ $transaction = $conn ->query(
                         <a href="stats.php">Statistics</a></li>
                     <li class="items">
                         <img src="./assests/nav/transaction.svg" alt="stats.svg" class="nav-image" width="40px">
-                        Transactions</li>
+                        <a href="transaction.php">Transactions</a></li>
                     <li class="items">
                         <img src="./assests/nav/report.svg" alt="report.svg" class="nav-image" width="40px">
                         Report</li>
