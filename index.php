@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
 $host = "localhost";
 $username = "root";
 $password = "Cyanide@1010"; // replace with yours
@@ -10,20 +19,20 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$incomeResult = $conn -> query("select SUM(amount) AS total_income from income");
+$incomeResult = $conn -> query("select SUM(amount) AS total_income from income WHERE user_id = $user_id");
 $totalIncome = $incomeResult ->fetch_assoc()['total_income'] ?? 0;
 
 
-$expenseResult = $conn ->query("select SUM(amount) as total_expense from expense");
+$expenseResult = $conn ->query("select SUM(amount) as total_expense from expense WHERE user_id = $user_id");
 $totalExpense = $expenseResult ->fetch_assoc()['total_expense'] ?? 0;
 
 $balance = $totalIncome - $totalExpense;
 
 $transaction = $conn ->query(
     "
-    SELECT category, amount, date, 'Expense' AS type FROM expense
+    SELECT category, amount, date, 'Expense' AS type FROM expense WHERE user_id = $user_id
     UNION
-    SELECT category, amount, date, 'Income' AS type FROM income
+    SELECT category, amount, date, 'Income' AS type FROM income WHERE user_id = $user_id
     ORDER BY date DESC
     LIMIT 5
 "
@@ -64,6 +73,10 @@ $transaction = $conn ->query(
                     <li class="items">
                         <img src="./assests/nav/report.svg" alt="report.svg" class="nav-image" width="40px">
                         Report</li>
+                    <li class="items">
+                        <img src="./assests/log-out.svg" alt="logout.svg" class="nav-image" width="40px">
+                        <a href="logout.php" onclick="return confirm('Are you sure you want to log out?')">Logout</a>
+                    </li>
                 </ul>
             </nav>
         </div>

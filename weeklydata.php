@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+$user_id = $_SESSION['user_id'];
+
 $host = "localhost";
 $username = "root";
 $password = "Cyanide@1010";
@@ -14,7 +22,9 @@ SELECT
   DATE_FORMAT(date, '%a') AS day_name,
   SUM(amount) AS total
 FROM expense
-WHERE date >= CURDATE() - INTERVAL 6 DAY
+WHERE
+    date >= CURDATE() - INTERVAL 6 DAY
+    AND user_id = $user_id
 GROUP BY day_name
 ORDER BY FIELD(day_name, 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 ";

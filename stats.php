@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+$user_id = $_SESSION['user_id'];
+
+
 $host = "localhost";
 $username = "root";
 $password = "Cyanide@1010"; // replace with yours
@@ -13,16 +22,16 @@ if ($conn->connect_error) {
 $month = date('m');
 $year = date('Y');
 
-$all_income = $conn ->query('SELECT SUM(amount) AS total FROM income')->fetch_assoc()['total'] ?? 0;
-$all_expense = $conn ->query('SELECT SUM(amount) AS total FROM expense')->fetch_assoc()['total'] ?? 0;
+$all_income = $conn ->query("SELECT SUM(amount) AS total FROM income WHERE user_id = $user_id")->fetch_assoc()['total'] ?? 0;
+$all_expense = $conn ->query("SELECT SUM(amount) AS total FROM expense WHERE user_id = $user_id")->fetch_assoc()['total'] ?? 0;
 $all_balance = $all_income - $all_expense;
 
-$month_income = $conn->query("SELECT SUM(amount) AS total FROM income WHERE MONTH(date) = $month AND YEAR(date) = $year")->fetch_assoc()['total'] ?? 0;
-$month_expense = $conn->query("SELECT SUM(amount) AS total FROM expense WHERE MONTH(date) = $month AND YEAR(date) = $year")->fetch_assoc()['total'] ?? 0;
+$month_income = $conn->query("SELECT SUM(amount) AS total FROM income WHERE MONTH(date) = $month AND YEAR(date) = $year AND user_id = $user_id")->fetch_assoc()['total'] ?? 0;
+$month_expense = $conn->query("SELECT SUM(amount) AS total FROM expense WHERE MONTH(date) = $month AND YEAR(date) = $year AND user_id = $user_id")->fetch_assoc()['total'] ?? 0;
 $month_balance = $month_income - $month_expense;
 
-$year_income = $conn ->query("SELECT SUM(amount) AS total FROM income WHERE YEAR(date) = $year")->fetch_assoc()['total'] ?? 0;
-$year_expense = $conn ->query("SELECT SUM(amount) AS total FROM expense WHERE YEAR(date) = $year")->fetch_assoc()['total'] ?? 0;
+$year_income = $conn ->query("SELECT SUM(amount) AS total FROM income WHERE YEAR(date) = $year AND user_id = $user_id")->fetch_assoc()['total'] ?? 0;
+$year_expense = $conn ->query("SELECT SUM(amount) AS total FROM expense WHERE YEAR(date) = $year AND  user_id = $user_id")->fetch_assoc()['total'] ?? 0;
 $year_balance = $year_income - $year_expense;
 
 ?>
@@ -60,6 +69,10 @@ $year_balance = $year_income - $year_expense;
                     <li class="items">
                         <img src="./assests/nav/report.svg" alt="report.svg" class="nav-image" width="40px">
                         Report</li>
+                    <li class="items">
+                        <img src="./assests/log-out.svg" alt="logout.svg" class="nav-image" width="40px">
+                        <a href="logout.php">Logout</a>
+                    </li>
                 </ul>
             </nav>
         </div>

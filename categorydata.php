@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+$user_id = $_SESSION['user_id'];
+
 $host = "localhost";
 $username = "root";
 $password = "Cyanide@1010";
@@ -12,6 +20,7 @@ if ($conn->connect_error) {
 $sql = "
     SELECT category, SUM(amount) as total
     FROM expense
+    WHERE user_id = $user_id
     GROUP BY category
 ";
 

@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
 $host = "localhost";
 $username = "root";
 $password = "Cyanide@1010"; // replace with yours
@@ -10,20 +19,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$incomeResult = $conn -> query("select SUM(amount) AS total_income from income");
-$totalIncome = $incomeResult ->fetch_assoc()['total_income'] ?? 0;
-
-
-$expenseResult = $conn ->query("select SUM(amount) as total_expense from expense");
-$totalExpense = $expenseResult ->fetch_assoc()['total_expense'] ?? 0;
-
-$balance = $totalIncome - $totalExpense;
 
 $transaction = $conn ->query(
     "
     SELECT id, category, amount, date, 'Expense' AS type FROM expense
     UNION
     SELECT id, category, amount, date, 'Income' AS type FROM income
+    WHERE user_id = $user_id
     ORDER BY date DESC
 "
 );
@@ -65,6 +67,10 @@ $transaction = $conn ->query(
                     <li class="items">
                         <img src="./assests/nav/report.svg" alt="report.svg" class="nav-image" width="40px">
                         Report</li>
+                    <li class="items">
+                        <img src="./assests/log-out.svg" alt="logout.svg" class="nav-image" width="40px">
+                        <a href="logout.php">Logout</a>
+                    </li>
                 </ul>
             </nav>
         </div>

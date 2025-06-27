@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+$user_id = $_SESSION['user_id'];
+
 $servername = "localhost";
 $username = "root"; // default XAMPP usernamewo
 $password = "Cyanide@1010";     // default XAMPP password is empty
@@ -17,9 +25,9 @@ $category = $_POST['description'];
 $amount = $_POST['Amount'];
 $date = date('Y-m-d H:i:s');
 
-$sql = "INSERT INTO expense (category,amount,date) values(?,?,?)";
+$sql = "INSERT INTO expense (category,amount,date,user_id) values(?,?,?,?)";
 $stmt = $conn->prepare($sql);
-$stmt ->bind_param("sds", $category, $amount, $date);
+$stmt ->bind_param("sdsi", $category, $amount, $date, $user_id);
 
 if (!$stmt) {
     die("Prepare failed: " . $conn->error);
