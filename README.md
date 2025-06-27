@@ -26,5 +26,4 @@ dont know what to add below the quick buttons lemme think
 
 ![Stats](assests/screenshots/stats.png)
 
-
-working on transaction and report page
+![transactions](assests/screenshots/transactions.png)
