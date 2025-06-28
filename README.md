@@ -29,7 +29,7 @@ dont know what to add below the quick buttons lemme think
 ![Stats](assests/screenshots/stats.png)
 
 ## 💸 Transactions Page
-![Transactions](assests/screenshots/transactions.png)
+![Transactions](assests/screenshots/transaction.png)
 
 ## 📅 Budget Page
 ![Budget](assests/screenshots/budget.png)
