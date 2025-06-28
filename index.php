@@ -72,7 +72,7 @@ $transaction = $conn ->query(
                         <a href="transaction.php">Transactions</a></li>
                     <li class="items">
                         <img src="./assests/nav/report.svg" alt="report.svg" class="nav-image" width="40px">
-                        Report</li>
+                        <a href="budget.php">Budget</a></li>
                     <li class="items">
                         <img src="./assests/log-out.svg" alt="logout.svg" class="nav-image" width="40px">
                         <a href="logout.php" onclick="return confirm('Are you sure you want to log out?')">Logout</a>

@@ -66,7 +66,7 @@ $transaction = $conn ->query(
                         <a href="transaction.php" class="active">Transactions</a></li>
                     <li class="items">
                         <img src="./assests/nav/report.svg" alt="report.svg" class="nav-image" width="40px">
-                        Report</li>
+                        <a href="budget.php">Budget</a></li>
                     <li class="items">
                         <img src="./assests/log-out.svg" alt="logout.svg" class="nav-image" width="40px">
                         <a href="logout.php">Logout</a>
