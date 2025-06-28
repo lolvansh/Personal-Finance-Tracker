@@ -21,6 +21,11 @@ if ($conn->connect_error) {
 
 $weeklyBudgets = $conn->query("SELECT * FROM budgets WHERE user_id = $user_id AND budget_type = 'weekly'");
 $monthlyBudgets = $conn->query("SELECT * FROM budgets WHERE user_id = $user_id AND budget_type = 'monthly'");
+
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,13 +70,26 @@ $monthlyBudgets = $conn->query("SELECT * FROM budgets WHERE user_id = $user_id A
         $spent = $spent_result->fetch_assoc()['spent'] ?? 0;
         $percentage = $budget_amount > 0 ? round(($spent / $budget_amount) * 100) : 0;
         $residual = max(0, $budget_amount - $spent);
+        
+        $categoryIcons = [
+        'Grocery' => 'grocery.svg',
+        'Transport' => 'transport.svg',
+        'Shopping' => 'shopping.svg',
+        'Medical' => 'medical.svg',
+        'Entertainment' => 'entertainment.svg',
+        'Others' => 'others.svg'
+        ];
+
+        $category = $row['category'];
+        $icon = isset($categoryIcons[$category]) ? $categoryIcons[$category] : 'default.svg';
+
       ?>
       <div class="weekly-display">
         <div class="middle">
           <div class="heading">Weekly Budget</div>
           <div class="category"><?= htmlspecialchars($row['category']) ?></div>
           <div class="progress-container">
-            <div class="budget-image"><img src="./assests/transactions/train.svg" width="50px"></div>
+            <div class="budget-image"><img src="./assests/transactions/<?= $icon?>" width="50px"></div>
             <div class="progress-bar-detials">
               <div class="progress-details-top">
                 <div class="starting-date"><?= date('d/m/Y', strtotime($row['start_date'])) ?></div>
@@ -106,13 +124,26 @@ $monthlyBudgets = $conn->query("SELECT * FROM budgets WHERE user_id = $user_id A
         $spent = $spent_result->fetch_assoc()['spent'] ?? 0;
         $percentage = $budget_amount > 0 ? round(($spent / $budget_amount) * 100) : 0;
         $residual = max(0, $budget_amount - $spent);
+                
+        $categoryIcons = [
+        'Grocery' => 'grocery.svg',
+        'Transport' => 'transport.svg',
+        'Shopping' => 'shopping.svg',
+        'Medical' => 'medical.svg',
+        'Entertainment' => 'entertainment.svg',
+        'Others' => 'others.svg'
+        ];
+
+        $category = $row['category'];
+        $icon = isset($categoryIcons[$category]) ? $categoryIcons[$category] : 'default.svg';
+
       ?>
       <div class="monthly-display">
         <div class="middle">
           <div class="heading">Monthly Budget</div>
           <div class="category"><?= htmlspecialchars($row['category']) ?></div>
           <div class="progress-container">
-            <div class="budget-image"><img src="./assests/transactions/train.svg" width="50px"></div>
+            <div class="budget-image"><img src="./assests/transactions/<?= $icon ?>" width="50px"></div>
             <div class="progress-bar-detials">
               <div class="progress-details-top">
                 <div class="starting-date"><?= date('d/m/Y', strtotime($row['start_date'])) ?></div>
