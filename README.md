@@ -21,9 +21,21 @@ A responsive web application to help you track your income, expenses, and financ
 - **Server**: XAMPP / Apache (for local testing)
 
 dont know what to add below the quick buttons lemme think
+## 📃 Dashboard Page
 ![Dashboard](assests/screenshots/dashboard.png)
 
 
+## 📊 Stats Page
 ![Stats](assests/screenshots/stats.png)
 
-![transactions](assests/screenshots/transactions.png)
+## 💸 Transactions Page
+![Transactions](assests/screenshots/transactions.png)
+
+## 📅 Budget Page
+![Budget](assests/screenshots/budget.png)
+
+## 📝 Register Page
+![Register](assests/screenshots/register.png)
+
+## 🔐 Login Page
+![Login](assests/screenshots/login.png)
