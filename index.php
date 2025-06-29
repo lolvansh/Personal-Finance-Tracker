@@ -205,6 +205,9 @@ $monthname = $monthnameresult->fetch_assoc()['month_name'];
                             </div>
                         </div>
                     </div>
+                    <div class="cat-image">
+                        <img src="./assests/cat.svg" width="150px">
+                    </div>
                 </div>
                 </div>
         </div>
