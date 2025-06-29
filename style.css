@@ -181,7 +181,7 @@ a{
 
 .quick-text{
     font-family:Georgia, 'Times New Roman', Times, serif;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 0;
     margin-bottom: 10px;
     text-align: left;
@@ -223,6 +223,41 @@ a{
 
 .add-expense:hover .expense-btn{
     background-color: hsl(133, 41%,80%);
+}
+
+
+/* summary section in index-page */
+.summary{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.summary-heading{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
+
+.this-month{
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    margin-top: 4px;
+}
+
+.summary-descri{
+    background-color: hsl(133, 41%, 70%);
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.desc-container{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 8px;
 }
 
 
@@ -522,3 +557,7 @@ a{
     cursor: pointer;
     margin-top: 12px;
 }
+
+
+
+

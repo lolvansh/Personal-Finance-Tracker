@@ -37,19 +37,14 @@ $transaction = $conn ->query(
     LIMIT 5
 "
 );
-
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finance-tracker</title>
-    <link rel="stylesheet" href="style.css?v=1.0">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
     <div class="top-section">
@@ -148,11 +143,14 @@ $transaction = $conn ->query(
                     </div>
                     <div class="summary">
                         <div class="summary-heading">Summary</div>
-                        <div class="this-month">January</div>
+                        
                         <div class="summary-descri">
-                            <div class="summary-balance">Balance: $100000</div>
-                            <div class="summary-average">Average(spent): $10000</div>
-                            <div class="summary-transaction">Transactions: 100 </div>
+                            <div class="this-month">January</div>
+                            <div class="desc-container">
+                                <div class="summary-balance">Balance: $100000</div>
+                                <div class="summary-average">Average(spent): $10000</div>
+                                <div class="summary-transaction">Transactions: 100 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
