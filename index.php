@@ -37,6 +37,58 @@ $transaction = $conn ->query(
     LIMIT 5
 "
 );
+
+$monthlyincomeResult = $conn -> query("select SUM(amount) AS total_income from income WHERE user_id = $user_id AND MONTH(date) = MONTH(CURDATE()) AND YEAR(date) = YEAR(CURDATE())");
+$monthlytotalIncome = $monthlyincomeResult ->fetch_assoc()['total_income'] ?? 0;
+
+
+$monthlyexpenseResult = $conn ->query("select SUM(amount) as total_expense from expense WHERE user_id = $user_id AND MONTH(date) = MONTH(CURDATE()) AND YEAR(date) = YEAR(CURDATE())");
+$monthlytotalExpense = $monthlyexpenseResult ->fetch_assoc()['total_expense'] ?? 0;
+
+$monthlybalance = $monthlytotalIncome - $monthlytotalExpense;
+
+
+$sql = "
+    SELECT 
+        SUM(amount) / DAY(CURDATE()) AS average_daily_expense
+    FROM expense
+    WHERE 
+        user_id = $user_id
+        AND MONTH(date) = MONTH(CURDATE())
+        AND YEAR(date) = YEAR(CURDATE())
+";
+
+$result = $conn->query($sql);
+$average = $result->fetch_assoc()['average_daily_expense'] ?? 0;
+
+
+$transactionsql = "
+    SELECT COUNT(*) AS total_transactions
+    FROM (
+        SELECT id, date FROM income
+        WHERE user_id = $user_id
+        AND MONTH(date) = MONTH(CURDATE())
+        AND YEAR(date) = YEAR(CURDATE())
+        
+        UNION ALL
+        
+        SELECT id, date FROM expense
+        WHERE user_id = $user_id
+        AND MONTH(date) = MONTH(CURDATE())
+        AND YEAR(date) = YEAR(CURDATE())
+    ) AS all_transactions
+";
+
+$transactionresult = $conn->query($transactionsql);
+$totaltransaction = $transactionresult->fetch_assoc()['total_transactions'] ?? 0;
+
+
+
+
+$monthnameresult = $conn ->query("SELECT DATE_FORMAT(date, '%M') AS month_name FROM expense
+where month(date) = month(curdate()) limit 1;");
+$monthname = $monthnameresult->fetch_assoc()['month_name'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -145,11 +197,11 @@ $transaction = $conn ->query(
                         <div class="summary-heading">Summary</div>
                         
                         <div class="summary-descri">
-                            <div class="this-month">January</div>
+                            <div class="this-month"><?= htmlspecialchars($monthname)?></div>
                             <div class="desc-container">
-                                <div class="summary-balance">Balance: $100000</div>
-                                <div class="summary-average">Average(spent): $10000</div>
-                                <div class="summary-transaction">Transactions: 100 </div>
+                                <div class="summary-balance">Balance: ₹<?= number_format($monthlybalance,0)?></div>
+                                <div class="summary-average">Average(spent): ₹<?= number_format($average,0)?> </div>
+                                <div class="summary-transaction">Transactions: <?= number_format($totaltransaction,0)?> </div>
                             </div>
                         </div>
                     </div>
