@@ -146,6 +146,15 @@ $transaction = $conn ->query(
                             <button class="expense-btn">Add Income</button>
                         </a>
                     </div>
+                    <div class="summary">
+                        <div class="summary-heading">Summary</div>
+                        <div class="this-month">January</div>
+                        <div class="summary-descri">
+                            <div class="summary-balance">Balance: $100000</div>
+                            <div class="summary-average">Average(spent): $10000</div>
+                            <div class="summary-transaction">Transactions: 100 </div>
+                        </div>
+                    </div>
                 </div>
                 </div>
         </div>
