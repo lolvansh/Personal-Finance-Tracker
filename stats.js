@@ -29,28 +29,37 @@ async function loadlinechart(params) {
         datasets: [{
           label: 'Expenses',
           data: values,
-          borderColor: 'rgba(141, 236, 192, 0.7)',
-          backgroundColor: 'rgba(141, 236, 192, 0.2)',
+          borderColor: 'rgba(122, 173, 240, 0.2)',
+          backgroundColor: 'rgba(141, 179, 228, 0.2)',
           tension: 0.4,
           fill: true,
           pointRadius: 5,
           pointBackgroundColor: 'rgba(33, 34, 32, 0.14)'
         }]
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top'
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top'
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: 'black' // 👈 X-axis label color
           }
         },
-        scales: {
-          y: {
-            beginAtZero: true
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: 'black' // 👈 Y-axis label color
           }
         }
       }
-    });
+    }
+    }
+  );
   } catch (error) {
     console.error("Error fetching chart data:", error);
   }

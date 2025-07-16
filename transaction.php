@@ -20,16 +20,30 @@ if ($conn->connect_error) {
 }
 
 
-$transaction = $conn ->query(
-    "
-    SELECT id, category, amount, date, 'Expense' AS type FROM expense
-    UNION
-    SELECT id, category, amount, date, 'Income' AS type FROM income
-    WHERE user_id = $user_id
-    ORDER BY date DESC
-"
-);
+$type = $_GET['type'] ?? '';
+$category = $_GET['category'] ?? '';
 
+if ($type === 'Income') {
+    $query = "SELECT *, 'Income' AS type FROM income WHERE user_id = $user_id";
+    if (!empty($category)) {
+        $query .= " AND category = '" . $conn->real_escape_string($category) . "'";
+    }
+} elseif ($type === 'Expense') {
+    $query = "SELECT *, 'Expense' AS type FROM expense WHERE user_id = $user_id";
+    if (!empty($category)) {
+        $query .= " AND category = '" . $conn->real_escape_string($category) . "'";
+    }
+} else {
+    
+    $query = "
+        SELECT *, 'Income' AS type FROM income WHERE user_id = $user_id
+        UNION ALL
+        SELECT *, 'Expense' AS type FROM expense WHERE user_id = $user_id
+        ORDER BY date DESC
+    ";
+}
+
+$transaction = $conn->query($query);
 
 
 ?>
@@ -85,24 +99,50 @@ $transaction = $conn ->query(
             </div>
             
             <div class="page-content">
-                <div class="audits transaction-audits">
-                    <?php while($row = $transaction->fetch_assoc()): ?>
-                        <div class="transaction total-transaction <?= $row['type'] === 'Expense' ? 'expense' : 'income' ?>">
-                            <img src="./assests/transactions/<?= $row['type'] === 'Expense' ? 'expense.svg' : 'income.svg' ?>" width="50px" class="icon">
-                            <p class="usage"> <?= htmlspecialchars($row['category']) ?> </p>
-                            <p class="Time"> <?= date("d M y, H:i", strtotime($row['date'])) ?> </p>
-                            <p class="amount">
-                                <?= $row['type'] === 'Expense' ? '-' : '+' ?>
-                                ₹<?= number_format($row['amount'], 2) ?>
-                            </p>
-                            <img src="./assests/transactions/dots.svg" width="50px" class="menu-icon">
-                            <div class="actions">
-                                <a href="edit.php?id=<?= $row['id'] ?>&type=<?= $row['type'] ?>" class="edit-btn">✏️ Edit</a>
-                                <a href="delete.php?id=<?= $row['id'] ?>&type=<?= $row['type'] ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this transaction?');">🗑️ Delete</a>
+                <div class="transaction-container">
+                    <div class="filter">
+                        <form action="" method="get" class="filter-form">
+                            <div class="filter-name">Filter</div>
+                            <div>
+                              <select name="type" id="type-select">
+                                <option value="">All Types</option>
+                                <option value="Income">Income</option>
+                                <option value="Expense">Expense</option>
+                            </select>
                             </div>
-                        </div>
-                    <?php endwhile; ?>
-                    <p class="errordisplay" style="display:none"></p>
+                            <div>
+
+                            
+                            <select name="category" id="category-select">
+                               <option value="">--Select Category--</option>
+                            </select>
+                            </div>
+
+                            <div>
+                            <button type="submit" id="btn">Apply Filter</button>
+                            </div>
+                        </form>
+                    </div>
+                
+                    <div class="audits transaction-audits">
+                        <?php while($row = $transaction->fetch_assoc()): ?>
+                            <div class="transaction total-transaction <?= $row['type'] === 'Expense' ? 'expense' : 'income' ?>">
+                                <img src="./assests/transactions/<?= $row['type'] === 'Expense' ? 'expense.svg' : 'income.svg' ?>" width="50px" class="icon">
+                                <p class="usage"> <?= htmlspecialchars($row['category']) ?> </p>
+                                <p class="Time"> <?= date("d M y, H:i", strtotime($row['date'])) ?> </p>
+                                <p class="amount">
+                                    <?= $row['type'] === 'Expense' ? '-' : '+' ?>
+                                    ₹<?= number_format($row['amount'], 2) ?>
+                                </p>
+                                <img src="./assests/transactions/dots.svg" width="50px" class="menu-icon">
+                                <div class="actions">
+                                    <a href="edit.php?id=<?= $row['id'] ?>&type=<?= $row['type'] ?>" class="edit-btn">✏️ Edit</a>
+                                    <a href="delete.php?id=<?= $row['id'] ?>&type=<?= $row['type'] ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this transaction?');">🗑️ Delete</a>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                        <p class="errordisplay" style="display:none"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -124,9 +164,48 @@ $transaction = $conn ->query(
                 document.querySelector(".errordisplay").textContent = "No more Valid transaction Found";
             }
             });
-    
-            
+
         });
+
+        
+        document.addEventListener("DOMContentLoaded", ()=>{
+            const typeSelect = document.querySelector("#type-select");
+            
+            const categorySelect = document.querySelector("#category-select");
+            
+            const categories = {
+                Income: ['Salary','Gift','Loan','Pocket-money','Savings','Others'],
+                Expense: ['Grocery','Public Transport','Shopping','Petrol','Entertainment','Medical','Bills','Others']
+            };
+
+            
+
+            typeSelect.addEventListener('change', ()=>{
+                const selectedType = typeSelect.value;
+                    categorySelect.innerHTML = '<option value="">-- Select Category --</option>';
+
+                    if(categories[selectedType]){
+                        categories[selectedType].forEach(category=>{
+                            const option = document.createElement("option");
+                            option.value = category;
+                            option.textContent = category;
+                            categorySelect.appendChild(option);
+                        });
+                    }
+                
+            });
+
+            const btn = document.querySelector("#btn").addEventListener("click", ()=>{
+                
+                typeSelect.form.submit();
+                categorySelect.form.submit();
+            })
+
+
+        })
+
+
+            
     </script>
 </body>
 </html>
